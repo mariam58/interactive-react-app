@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import Rate from './components/Rate';
+import Result from './components/Result';
 
 function App() {
+  const [activeRate, setActiveRate] = useState(null);
+  const [submit, setSubmit] = useState(false);
+  let renderResult;
+  if (activeRate || !activeRate) {
+    renderResult = <Rate activeRate={activeRate} setActiveRate={setActiveRate} setSubmit={setSubmit} />
+    if (activeRate && submit) {
+      renderResult = <Result activeRate={activeRate} />
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>   
+      {renderResult}
     </div>
   );
 }
